@@ -6,10 +6,8 @@ public class Enemy : MonoBehaviour
 {
     //Скорость движения врага
     public float speed;
- 
     //Цель, к которой движется враг
     public Transform target;
- 
     //Очки урона от атаки врагом игрока
     public int playerDamage = 2;
  
@@ -26,7 +24,10 @@ public class Enemy : MonoBehaviour
     //При столкновении врага с игроком второму наносится урон
     private void OnTriggerEnter(Collider other)
     {
-        Player player = other.GetComponent<Player>();
-        player.TakeDamage(playerDamage);
+        if (other.tag == "Player")
+        {
+            Health health = other.GetComponent<Health>();
+            health.TakeDamage(playerDamage);
+        }
     }
 }
